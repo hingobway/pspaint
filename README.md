@@ -18,7 +18,10 @@ The functions:
 - Possible extras:
   - Multiple pens??
   - Erasing
-  - Take a picture and draw on it
+  - Change Background
+    - White
+    - Picture
+    - Live Video Feed
 
 ## The Plan
 
@@ -29,3 +32,19 @@ The functions:
 1. Plan out UI
 1. Build UI
 1. Add more changes
+
+# How To Use
+
+## Drawing
+1. Put on the ring (is it a ring?)
+
+## Changing The Color
+
+## Clear The Image
+
+## Erase
+
+## Change Background
+* White 
+* Picture
+* Live Video Feed

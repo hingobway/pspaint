@@ -1,6 +1,6 @@
 import cv2 as cv
 import numpy as np
-
+import time 
 import circles
 
 cap = cv.VideoCapture(0)
@@ -8,6 +8,9 @@ cap = cv.VideoCapture(0)
 
 def die(*arg):
     pass
+
+def saveImage(img):
+    cv.imwrite("assets/picture" + str(int(time.time()))+'.jpg',img)
 
 
 # cv.namedWindow('settings')
@@ -21,6 +24,7 @@ def die(*arg):
 
 lines = []
 draw = False
+save=False
 newLine = False
 
 color = (255, 255, 255)
@@ -104,7 +108,7 @@ while(True):
                 cv.line(img, points[i], points[i-1], thisColor, 4)
 
     # Plot Buttons
-    if not draw:
+    if not draw and not save:
         num = len(circles.circles)
         radius = round(((height/num)-(pad*2))/2)
 
@@ -128,14 +132,15 @@ while(True):
                         color = current.color
 
     # Plots cursor when not drawing.
-    if(cursor):
+    if(cursor and (not save)):
         cv.circle(img, cursor, 5, (0, 0, 0), -1)
         cv.circle(img, cursor, 3, color, -1)
 
     cv.imshow('PSPaint', img)
 
-    # if(curBG==2):
-    #     frame=unedited
+    if(save):
+        save=False
+        saveImage(img)
 
     # UX
     val = cv.waitKey(1)
@@ -156,5 +161,11 @@ while(True):
     if(val==ord('f')):
         orig=cv.flip(orig,1)
         cv.imwrite('assets/cur.jpg',orig)
+        curBG=2
+    if(val==ord('s')):
+        if(not save):
+            save=True
     if(val == ord('q')):
         break
+
+

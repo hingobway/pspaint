@@ -36,6 +36,7 @@ The functions:
 # How To Use
 
 ## Drawing
+
 1. Put on the ring (is it a ring?)
 
 ## Changing The Color
@@ -45,6 +46,7 @@ The functions:
 ## Erase
 
 ## Change Background
-* White 
-* Picture
-* Live Video Feed
+
+- White
+- Picture
+- Live Video Feed

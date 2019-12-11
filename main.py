@@ -4,13 +4,17 @@ import time
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+import requests
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 import circles
 
 cloudinary.config(
     cloud_name = 'pspaint',  
-    api_key = '339238418596127',  
-    api_secret = 'gqlbede-cggKKI-6kHLK_HO2HZI'  
+    api_key = os.getenv('CKEY'),  
+    api_secret = os.getenv('CSECRET')
 )
 
 cap = cv.VideoCapture(0)
@@ -20,10 +24,16 @@ def die(*arg):
     pass
 
 def saveImage(img):
-    fname="assets/picture" + str(int(time.time()))+'.jpg'
+    ts=str(int(time.time()))
+    fname="assets/picture" + ts + '.jpg'
     cv.imwrite(fname,img)
     resp=cloudinary.uploader.upload(fname)
-    print(resp)
+    url=resp['secure_url']
+    r = requests.post('https://pspaint.xyz/api/upload', data = {'url':url, 'timestamp':ts})
+    if(r.status_code is not 200):
+        # freak out
+        pass
+    os.remove(fname)
 
 
 # cv.namedWindow('settings')
@@ -81,16 +91,26 @@ while(True):
     # hsat = 255
     # hval = 253
 
-    lhue = 5
-    lsat = 102
-    lval = 195
-    hhue = 25
-    hsat = 190
+    # Orange Finger
+    # lhue = 5
+    # lsat = 102
+    # lval = 195
+    # hhue = 25
+    # hsat = 190
+    # hval = 255
+
+    # Phone Blob
+    lhue = 98
+    lsat = 91
+    lval = 215
+    hhue = 107
+    hsat = 162
     hval = 255
 
     out = cv.inRange(hsv, np.array(
         [lhue, lsat, lval]), np.array([hhue, hsat, hval]))
 
+    # SHOW MASK FOR CONFIG
     # cv.imshow('m', out)
 
     # Find Center

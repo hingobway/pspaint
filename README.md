@@ -1,3 +1,5 @@
+> This application once lived in sync with www.pspaint.xyz, which is now defunct. The on-screen painting still works in-app (`py main.py`), but you'll need to first configure your own pen by uncommenting lines 97-102 and 140 in `main.py`.
+
 # pspaint
 
 This is PSPaint.
